@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: ddl-schemas-001
+      author: CharithNikool5
+      labels: "HU-NOTIF-002,ddl,schemas"
+      comment: "Create the notification schema. Nothing of this domain lives in public."
+      changes:
+        - sqlFile:
+            path: 001_create_schema_notification.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/01_schemas/001_create_schema_notification.rollback.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: false
