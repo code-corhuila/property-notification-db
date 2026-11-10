@@ -37,10 +37,19 @@ deploy/compose.yml     only the migration runner, notification-db-migrate
    `property-infra-postgres`. This repository creates the `NOLOGIN` roles
    `notification_reader` and `notification_writer` and grants `notification_writer` to
    `notification_app`.
-3. **Every changeset declares its rollback, and an applied changeset is never
+3. **Tables are created without foreign keys** in `03_tables`; keys are added in
+   `04_alter`, each one declaring what happens on delete, and every foreign key
+   column is indexed in `10_indexes`.
+4. **No foreign key to another domain.** `user_id` belongs to Identity: it is a
+   plain identifier, verified by contract.
+5. **Closed sets of values are a `CHECK`, never an `ENUM`** (the channels `EMAIL`,
+   `SMS` and `PUSH`, the delivery states).
+6. **Every changeset declares its rollback, and an applied changeset is never
    edited.** A correction is a new changeset.
-4. **Seeds are idempotent** (`INSERT … ON CONFLICT … DO UPDATE`). Demo data, if
+7. **Seeds are idempotent** (`INSERT … ON CONFLICT … DO UPDATE`). Demo data, if
    any, uses the Liquibase context `dev`, which only the `develop` runner enables.
+
+The SQL of every table is the one in `06-data/models.md` of `property-docs`.
 
 ## Run it
 
