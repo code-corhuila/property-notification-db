@@ -1,1 +1,69 @@
-databaseChangeLog: []
+databaseChangeLog:
+  - changeSet:
+      id: ddl-tables-001
+      author: CharithNikool5
+      labels: "HU-NOTIF-002,ddl,tables"
+      comment: "message_template: the texts of each code and channel."
+      changes:
+        - sqlFile:
+            path: 001_create_message_template.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/001_create_message_template.rollback.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: false
+  - changeSet:
+      id: ddl-tables-002
+      author: CharithNikool5
+      labels: "HU-NOTIF-002,ddl,tables"
+      comment: "notification_preference: the channels each user accepts (E-16, E-17)."
+      changes:
+        - sqlFile:
+            path: 002_create_notification_preference.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/002_create_notification_preference.rollback.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: false
+  - changeSet:
+      id: ddl-tables-003
+      author: CharithNikool5
+      labels: "HU-NOTIF-002,ddl,tables"
+      comment: "delivery_log: every notification dispatched, at most one per event and channel."
+      changes:
+        - sqlFile:
+            path: 003_create_delivery_log.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/003_create_delivery_log.rollback.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: false
+  - changeSet:
+      id: ddl-tables-004
+      author: CharithNikool5
+      labels: "HU-NOTIF-002,ddl,tables"
+      comment: "processed_event: the events already consumed."
+      changes:
+        - sqlFile:
+            path: 004_create_processed_event.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/004_create_processed_event.rollback.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: false
