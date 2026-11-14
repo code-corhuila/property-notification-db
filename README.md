@@ -51,6 +51,13 @@ deploy/compose.yml     only the migration runner, notification-db-migrate
 
 The SQL of every table is the one in `06-data/models.md` of `property-docs`.
 
+**The seed of `message_template`** (`02_dml/00_inserts`, every environment): the 9 templates
+of `09-microservices/services/08-notification/data-model.md` (DOC4), one per terminal event
+(`ReservaConfirmada`, `ReservaCancelada`, `ReservaExpirada`) and channel. `subject` only for
+`EMAIL`; Spanish bodies with the placeholders `{{nombre}}`, `{{reservaId}}`,
+`{{fechaInicio}}`, `{{fechaFin}}` and `{{motivo}}`. SMS and PUSH are seeded although MVP 1
+sends only e-mail (DEC-006). `tests/003_seed_message_templates.sql` checks them.
+
 ## Run it
 
 From `property-infra-postgres`, with the repositories cloned side by side and the

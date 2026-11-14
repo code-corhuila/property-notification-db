@@ -1,1 +1,18 @@
-databaseChangeLog: []
+databaseChangeLog:
+  - changeSet:
+      id: dml-inserts-001
+      author: CharithNikool5
+      labels: "HU-NOTIF-001,dml,seed"
+      comment: "message_template: the 9 templates of DOC4, one per terminal event and channel, in every environment."
+      changes:
+        - sqlFile:
+            path: 001_seed_message_templates.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/02_dml/00_inserts/001_seed_message_templates.rollback.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+            stripComments: false
